@@ -16,6 +16,14 @@ and the full text can be accessed directly at https://rdcu.be/b0mtx.
 
 ## Setup
 
+**This code can't be used to predict structure of an arbitrary protein sequence.
+It can be used to predict structure only on the CASP13 dataset (links below).**
+The feature generation code is tightly coupled to our internal infrastructure as
+well as external tools, hence we are unable to open-source it. We give guide as
+to the features used for those accustomed to computing them below. See also
+[issue #18](https://github.com/deepmind/deepmind-research/issues/28) for more
+details.
+
 ### Dependencies
 
 *   Python 3.6+.
@@ -200,7 +208,7 @@ thorough explanation are explained in the section below the table. Note that
 | `hhblits_profile`                 | ❌     | float32  | `(NR, 22)`      | A profile (probability distribution over amino acid types) computed using HHBlits MSA. Encoding: 20 amino acids + 'X' + '-'. |
 | `hmm_profile`                     | ✔️      | float32  | `(NR, 30)`      | The HHBlits HHM profile (from the `-ohhm` HHBlits output file). Asterisks in the output are replaced by 0.0. See below.      |
 | `key`                             | ❌     | string   | `(1)`           | The unique id of the protein.                                                                                                |
-| `mutual_information`              | ✔️      | float32  | `(NR, NR, 1)`   | The average product corrected mutual information. See https://doi.org/10.1093/bioinformatics/btm604.                         |
+| `mutual_information`              | ❌      | float32  | `(NR, NR, 1)`   | The average product corrected mutual information. See https://doi.org/10.1093/bioinformatics/btm604.                         |
 | `non_gapped_profile`              | ✔️      | float32  | `(NR, 21)`      | A profile from amino acids only (discounting gaps). See below.                                                               |
 | `num_alignments`                  | ✔️      | int64    | `(NR, 1)`       | The number of HHBlits multiple sequence alignments. Has to be repeated `NR` times. See below.                                |
 | `num_effective_alignments`        | ❌     | float32  | `(1)`           | The number of effective alignments (neff at 62 % sequence similarity).                                                       |
